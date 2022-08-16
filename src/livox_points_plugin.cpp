@@ -2,9 +2,9 @@
 // Created by lfc on 2021/2/28.
 //
 
-#include "livox_laser_simulation/livox_points_plugin.h"
+#include "livox_laser_simulation/livox_points_plugin.hpp"
 #include "livox_laser_simulation/csv_reader.hpp"
-#include "livox_laser_simulation/livox_ode_multiray_shape.h"
+#include "livox_laser_simulation/livox_ode_multiray_shape.hpp"
 #include <gazebo/physics/Model.hh>
 #include <gazebo/physics/MultiRayShape.hh>
 #include <gazebo/physics/PhysicsEngine.hh>

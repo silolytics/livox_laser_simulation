@@ -4,7 +4,7 @@
 
 #ifndef SRC_GAZEBO_LIVOX_POINTS_PLUGIN_H
 #define SRC_GAZEBO_LIVOX_POINTS_PLUGIN_H
-#include "livox_ode_multiray_shape.h"
+#include "livox_ode_multiray_shape.hpp"
 #include <gazebo/plugins/RayPlugin.hh>
 #include <ros/node_handle.h>
 #include <tf/transform_broadcaster.h>
