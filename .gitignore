@@ -1,0 +1,7 @@
+build/
+*.pyc
+*.pyo
+*.swp
+*.idea
+.vscode/c_cpp_properties.json
+.vscode/browse.vc*
