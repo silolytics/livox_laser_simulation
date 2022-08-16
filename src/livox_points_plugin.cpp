@@ -45,7 +45,7 @@ void LivoxPointsPlugin::Load(gazebo::sensors::SensorPtr _parent, sdf::ElementPtr
         ROS_INFO_STREAM("cannot get csv file!" << file_name << "will return !");
         return;
     }
-    sdfPtr = sdf;
+    auto sdfPtr = sdf;
     auto rayElem = sdfPtr->GetElement("ray");
     auto scanElem = rayElem->GetElement("scan");
     auto rangeElem = rayElem->GetElement("range");
