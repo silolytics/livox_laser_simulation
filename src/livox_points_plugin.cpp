@@ -3,16 +3,16 @@
 //
 
 #include "livox_laser_simulation/livox_points_plugin.h"
-#include <ros/ros.h>
-#include <sensor_msgs/PointCloud.h>
+#include "livox_laser_simulation/csv_reader.hpp"
+#include "livox_laser_simulation/livox_ode_multiray_shape.h"
 #include <gazebo/physics/Model.hh>
 #include <gazebo/physics/MultiRayShape.hh>
 #include <gazebo/physics/PhysicsEngine.hh>
 #include <gazebo/physics/World.hh>
 #include <gazebo/sensors/RaySensor.hh>
 #include <gazebo/transport/Node.hh>
-#include "livox_laser_simulation/csv_reader.hpp"
-#include "livox_laser_simulation/livox_ode_multiray_shape.h"
+#include <ros/ros.h>
+#include <sensor_msgs/PointCloud.h>
 
 namespace gazebo {
 
@@ -30,7 +30,7 @@ void convertDataToRotateInfo(const std::vector<std::vector<double>> &datas, std:
             avia_infos.emplace_back();
             avia_infos.back().time = data[0];
             avia_infos.back().azimuth = data[1] * deg_2_rad;
-            avia_infos.back().zenith = data[2] * deg_2_rad - M_PI_2;  //转化成标准的右手系角度
+            avia_infos.back().zenith = data[2] * deg_2_rad - M_PI_2; //转化成标准的右手系角度
         } else {
             ROS_INFO_STREAM("data size is not 3!");
         }
@@ -169,7 +169,8 @@ void LivoxPointsPlugin::OnNewLaserScans() {
                 //                          pair.second.azimuth);
             }
         }
-        if (scanPub && scanPub->HasConnections()) scanPub->Publish(laserMsg);
+        if (scanPub && scanPub->HasConnections())
+            scanPub->Publish(laserMsg);
         rosPointPub.publish(scan_point);
         ros::spinOnce();
     }
@@ -345,4 +346,4 @@ void LivoxPointsPlugin::SendRosTf(const ignition::math::Pose3d &pose, const std:
         tf::StampedTransform(tf, ros::Time::now(), raySensor->ParentName(), raySensor->Name()));
 }
 
-}
+} // namespace gazebo

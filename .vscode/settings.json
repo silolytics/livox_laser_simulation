@@ -1,0 +1,21 @@
+{
+    "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "[cpp]": {
+      "editor.defaultFormatter": "xaver.clang-format"
+    },
+  
+    "[yaml]": {
+      "editor.formatOnSave": false
+    },
+  
+    "[plaintext]": {
+      "editor.formatOnSave": false
+    },
+  
+    "[markdown]": {
+      "editor.formatOnSave": false
+    }
+  }
+  

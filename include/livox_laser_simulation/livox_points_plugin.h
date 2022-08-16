@@ -4,10 +4,10 @@
 
 #ifndef SRC_GAZEBO_LIVOX_POINTS_PLUGIN_H
 #define SRC_GAZEBO_LIVOX_POINTS_PLUGIN_H
+#include "livox_ode_multiray_shape.h"
+#include <gazebo/plugins/RayPlugin.hh>
 #include <ros/node_handle.h>
 #include <tf/transform_broadcaster.h>
-#include <gazebo/plugins/RayPlugin.hh>
-#include "livox_ode_multiray_shape.h"
 
 namespace gazebo {
 struct AviaRotateInfo {
@@ -17,14 +17,14 @@ struct AviaRotateInfo {
 };
 
 class LivoxPointsPlugin : public RayPlugin {
- public:
+  public:
     LivoxPointsPlugin();
 
     virtual ~LivoxPointsPlugin();
 
     void Load(sensors::SensorPtr _parent, sdf::ElementPtr _sdf);
 
- private:
+  private:
     ignition::math::Angle AngleMin() const;
 
     ignition::math::Angle AngleMax() const;
@@ -69,16 +69,16 @@ class LivoxPointsPlugin : public RayPlugin {
 
     double VerticalAngleResolution() const;
 
- protected:
+  protected:
     virtual void OnNewLaserScans();
 
- private:
-    void InitializeRays(std::vector<std::pair<int, AviaRotateInfo>>& points_pair,
-                        boost::shared_ptr<physics::LivoxOdeMultiRayShape>& ray_shape);
+  private:
+    void InitializeRays(std::vector<std::pair<int, AviaRotateInfo>> &points_pair,
+                        boost::shared_ptr<physics::LivoxOdeMultiRayShape> &ray_shape);
 
-    void InitializeScan(msgs::LaserScan*& scan);
+    void InitializeScan(msgs::LaserScan *&scan);
 
-    void SendRosTf(const ignition::math::Pose3d& pose, const std::string& father_frame, const std::string& child_frame);
+    void SendRosTf(const ignition::math::Pose3d &pose, const std::string &father_frame, const std::string &child_frame);
 
     boost::shared_ptr<physics::LivoxOdeMultiRayShape> rayShape;
     gazebo::physics::CollisionPtr laserCollision;
@@ -103,6 +103,6 @@ class LivoxPointsPlugin : public RayPlugin {
     double minDist = 0.1;
 };
 
-}  // namespace gazebo
+} // namespace gazebo
 
-#endif  // SRC_GAZEBO_LIVOX_POINTS_PLUGIN_H
+#endif // SRC_GAZEBO_LIVOX_POINTS_PLUGIN_H
