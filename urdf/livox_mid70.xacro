@@ -94,6 +94,4 @@
     <xacro:Livox_Mid_gazebo_sensor name="${name}" visualize="${visualize}"/>
   </xacro:macro>
     <xacro:Livox_Mid70 name="livox"/>
-  <xacro:include filename="$(find livox_laser_simulation)/urdf/standardrobots_oasis300.xacro"/>
-  <xacro:link_oasis name="oasis"/>
 </robot>
