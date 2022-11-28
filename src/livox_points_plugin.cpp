@@ -13,6 +13,8 @@
 #include <gazebo/transport/Node.hh>
 #include <ros/ros.h>
 #include <sensor_msgs/PointCloud.h>
+#include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/point_cloud_conversion.h>
 
 namespace gazebo {
 
@@ -56,7 +58,7 @@ void LivoxPointsPlugin::Load(gazebo::sensors::SensorPtr _parent, sdf::ElementPtr
     ROS_INFO_STREAM("ros topic name:" << curr_scan_topic);
     ros::init(argc, argv, curr_scan_topic);
     rosNode.reset(new ros::NodeHandle);
-    rosPointPub = rosNode->advertise<sensor_msgs::PointCloud>(curr_scan_topic, 5);
+    rosPointPub = rosNode->advertise<sensor_msgs::PointCloud2>(curr_scan_topic, 5);
 
     raySensor = _parent;
     auto sensor_pose = raySensor->Pose();
@@ -171,8 +173,15 @@ void LivoxPointsPlugin::OnNewLaserScans() {
         }
         if (scanPub && scanPub->HasConnections())
             scanPub->Publish(laserMsg);
-        rosPointPub.publish(scan_point);
-        ros::spinOnce();
+        sensor_msgs::PointCloud2 point_cloud_2;
+        if (sensor_msgs::convertPointCloudToPointCloud2(scan_point, point_cloud_2)) {
+            rosPointPub.publish(point_cloud_2);
+            ros::spinOnce();
+            return;
+        } else {
+            ROS_ERROR(
+                "[livox_laser_simulation] Conversion from sensor_msgs::PointCloud to sensor_msgs::PointCloud2 failed!");
+        }
     }
 }
 

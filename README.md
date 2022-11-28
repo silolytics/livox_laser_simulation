@@ -2,7 +2,8 @@
 
 A package to provide plug-in for [Livox Series LiDAR](https://www.livoxtech.com).
 
-This package is currently in development to support Ubuntu 20.04, ROS Noetic Ninjemys, and Gazebo 11 and will be tailored for the needs of Silolytics. It is not recommened to use this package in its current state.
+This package is currently in development to support Ubuntu 20.04, ROS Noetic Ninjemys, and Gazebo 11 and will be tailored for the needs of Silolytics. 
+It is not recommened to use this package in its current state in production environments.
 
 ## Requirements
 
