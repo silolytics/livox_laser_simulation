@@ -7,7 +7,10 @@
 #include "livox_ode_multiray_shape.hpp"
 #include <gazebo/plugins/RayPlugin.hh>
 #include <ros/node_handle.h>
-#include <tf/transform_broadcaster.h>
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2/LinearMath/Transform.h>
+#include <tf2_ros/transform_broadcaster.h>
+#include <geometry_msgs/TransformStamped.h>
 
 namespace gazebo {
 struct AviaRotateInfo {
@@ -92,7 +95,7 @@ class LivoxPointsPlugin : public RayPlugin {
 
     std::shared_ptr<ros::NodeHandle> rosNode;
     ros::Publisher rosPointPub;
-    std::shared_ptr<tf::TransformBroadcaster> tfBroadcaster;
+    std::shared_ptr<tf2_ros::TransformBroadcaster> tfBroadcaster;
 
     int64_t samplesStep = 0;
     int64_t currStartIndex = 0;

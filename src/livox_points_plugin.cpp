@@ -344,15 +344,24 @@ double LivoxPointsPlugin::VerticalAngleResolution() const {
 void LivoxPointsPlugin::SendRosTf(const ignition::math::Pose3d &pose, const std::string &father_frame,
                                   const std::string &child_frame) {
     if (!tfBroadcaster) {
-        tfBroadcaster.reset(new tf::TransformBroadcaster);
+        tfBroadcaster.reset(new tf2_ros::TransformBroadcaster);
     }
-    tf::Transform tf;
-    auto rot = pose.Rot();
     auto pos = pose.Pos();
-    tf.setRotation(tf::Quaternion(rot.X(), rot.Y(), rot.Z(), rot.W()));
-    tf.setOrigin(tf::Vector3(pos.X(), pos.Y(), pos.Z()));
-    tfBroadcaster->sendTransform(
-        tf::StampedTransform(tf, ros::Time::now(), raySensor->ParentName(), raySensor->Name()));
+    auto rot = pose.Rot();
+
+    geometry_msgs::TransformStamped transformStamped;
+    transformStamped.header.stamp = ros::Time::now();
+    transformStamped.header.frame_id = raySensor->ParentName();
+    transformStamped.child_frame_id = raySensor->Name();
+    transformStamped.transform.translation.x = pos.X();
+    transformStamped.transform.translation.y = pos.Y();
+    transformStamped.transform.translation.z = pos.Z();
+    transformStamped.transform.rotation.x = rot.X();
+    transformStamped.transform.rotation.y = rot.Y();
+    transformStamped.transform.rotation.z = rot.Z();
+    transformStamped.transform.rotation.w = rot.W();
+
+    tfBroadcaster->sendTransform(transformStamped);
 }
 
 } // namespace gazebo
