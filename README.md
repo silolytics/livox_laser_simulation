@@ -11,6 +11,8 @@ It is not recommened to use this package in its current state in production envi
 - ROS [Noetic Ninjemys](http://wiki.ros.org/noetic/)
 - Gazebo [11](http://gazebosim.org/)
 
+**Note**: You might need to follow [this guide](https://gazebosim.org/api/math/5.0/install.html) and run `sudo apt-get install libignition-math4-dev`
+
 ## Results
 
 - avia
