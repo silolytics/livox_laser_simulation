@@ -175,6 +175,8 @@ void LivoxPointsPlugin::OnNewLaserScans() {
             scanPub->Publish(laserMsg);
         sensor_msgs::PointCloud2 point_cloud_2;
         if (sensor_msgs::convertPointCloudToPointCloud2(scan_point, point_cloud_2)) {
+            // Expect simulated point clouds to be valid
+            point_cloud_2.is_dense = true;
             rosPointPub.publish(point_cloud_2);
             ros::spinOnce();
             return;

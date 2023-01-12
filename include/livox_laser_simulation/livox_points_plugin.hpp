@@ -6,11 +6,11 @@
 #define SRC_GAZEBO_LIVOX_POINTS_PLUGIN_H
 #include "livox_ode_multiray_shape.hpp"
 #include <gazebo/plugins/RayPlugin.hh>
+#include <geometry_msgs/TransformStamped.h>
 #include <ros/node_handle.h>
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2/LinearMath/Transform.h>
 #include <tf2_ros/transform_broadcaster.h>
-#include <geometry_msgs/TransformStamped.h>
 
 namespace gazebo {
 struct AviaRotateInfo {
