@@ -130,7 +130,7 @@ void LivoxPointsPlugin::OnNewLaserScans() {
 
         sensor_msgs::PointCloud scan_point;
         scan_point.header.stamp = ros::Time::now();
-        scan_point.header.frame_id = raySensor->Name();
+        scan_point.header.frame_id = "livox_frame";
         auto &scan_points = scan_point.points;
 
         for (auto &pair : points_pair) {
@@ -350,20 +350,6 @@ void LivoxPointsPlugin::SendRosTf(const ignition::math::Pose3d &pose, const std:
     }
     auto pos = pose.Pos();
     auto rot = pose.Rot();
-
-    geometry_msgs::TransformStamped transformStamped;
-    transformStamped.header.stamp = ros::Time::now();
-    transformStamped.header.frame_id = raySensor->ParentName();
-    transformStamped.child_frame_id = raySensor->Name();
-    transformStamped.transform.translation.x = pos.X();
-    transformStamped.transform.translation.y = pos.Y();
-    transformStamped.transform.translation.z = pos.Z();
-    transformStamped.transform.rotation.x = rot.X();
-    transformStamped.transform.rotation.y = rot.Y();
-    transformStamped.transform.rotation.z = rot.Z();
-    transformStamped.transform.rotation.w = rot.W();
-
-    tfBroadcaster->sendTransform(transformStamped);
 }
 
 } // namespace gazebo
